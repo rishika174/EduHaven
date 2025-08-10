@@ -12,15 +12,17 @@ import Leaderboard from "../components/stats/Leaderboard";
 import Test from "../components/stats/Test.jsx";
 import AdCard from "@/components/AdCard";
 
+import { Dropdown, DropdownMenuItem } from "@/components/dropdown";
+
 const Stats = () => {
-  const { user, fetchUserDetails } = useUserProfile(); // ✅ correct usage
+  const { user, fetchUserDetails } = useUserProfile();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        fetchUserDetails(decoded.id); // ✅ fetch full user info
+        fetchUserDetails(decoded.id);
       } catch (err) {
         console.error("Error decoding token:", err);
       }
@@ -32,11 +34,21 @@ const Stats = () => {
   }
 
   return (
-    <div className="m-6 ">
+    <div className="m-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Analytics</h1>
         <div className="flex items-center gap-4">
           <span className="text-gray-400">Great! Keep it up</span>
+
+          {/* Example dropdown usage */}
+          <Dropdown triggerLabel="Options">
+            <DropdownMenuItem onClick={() => alert("Option 1 clicked")}>
+              Option 1
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => alert("Option 2 clicked")}>
+              Option 2
+            </DropdownMenuItem>
+          </Dropdown>
         </div>
       </div>
 
